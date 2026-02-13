@@ -12,7 +12,7 @@ class Task {
     }
 }
 
-class CategoriesManager { // utility class for handling categories
+class CategoriesManager { // class for handling categories
     static validCategories = ['Personal', 'Work', 'School', 'Urgent', 'Short', 'Long'];
 
     static addCategories(categorieslist, categories) {
