@@ -93,6 +93,7 @@ Create a task functionality:
 - Add the object to localStorage
 - Retrieve object from localstorage and test method
 - Organize functions in the structures
+- If all works, git commit
 - Create categories to choose from (constraint so other categories cant be made)
 - Create functionality for user to add the task by themself through CLI
 - Create the last thing but in DOM

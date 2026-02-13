@@ -13,10 +13,16 @@ class Task {
 }
 
 class CategoriesManager { // utility class for handling categories
+    static validCategories = ['Personal', 'Work', 'School', 'Urgent', 'Short', 'Long'];
+
     static addCategories(categorieslist, categories) {
         if (categories) {
             for (let i = 0; i < categories.length; i++) {
-                categorieslist.push(categories[i]);
+                if (this.validCategories.includes(categories[i])) {
+                    categorieslist.push(categories[i]);
+                } else {
+                    console.log(`Category '${categories[i]}' is not a valid category.`);
+                }
             }
         }
 
