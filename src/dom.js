@@ -1,17 +1,16 @@
 import { Task, PersistanceManager } from './logic.js';
 
-const addTaskButton = document.querySelector('#add-task-button');
-const addTaskDialog = document.querySelector('#add-task-dialog');
-const addTaskForm = document.querySelector('#add-task-form');
+function createTaskDOM(taskObject) {
+    const taskContainer = document.createElement('div');
+    const taskTitle = document.createElement('span');
 
-addTaskButton.addEventListener('click', () => {
-    addTaskDialog.showModal();
-}); // the add task button's sole purpose
+    taskTitle.innerText = taskObject.title;
+    taskContainer.appendChild(taskTitle);
+    tasksContainer.appendChild(taskContainer);
+}
 
-addTaskForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    let formData = new FormData(addTaskForm);
+function handleFormData(form) {
+    let formData = new FormData(form);
 
     let title;
     let categories = [];
@@ -26,9 +25,29 @@ addTaskForm.addEventListener('submit', (e) => {
         }
     }
 
+    return {title, categories};
+}
+
+const addTaskButton = document.querySelector('#add-task-button');
+const addTaskDialog = document.querySelector('#add-task-dialog');
+const addTaskForm = document.querySelector('#add-task-form');
+const tasksContainer = document.querySelector('#tasks');
+
+addTaskButton.addEventListener('click', () => {
+    addTaskDialog.showModal();
+}); // the add task button's sole purpose
+
+addTaskForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const {title, categories} = handleFormData(addTaskForm);
+
     // this is logic stuff not supposed to be in dom, be careful with future imports to avoid circular dependencies
     const task = new Task(title, categories);
     PersistanceManager.storeTask(task);
 
+    createTaskDOM(task);
+
     addTaskDialog.close();
 });
+
