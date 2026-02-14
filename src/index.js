@@ -1,3 +1,5 @@
+import './style.css';
+
 class Task {
     id;
     title;
@@ -45,3 +47,12 @@ class PersistanceManager { // utility class for all localStorage related functio
         return reconstructedTaskObject;
     }
 }
+
+const addTaskButton = document.querySelector('#add-task-button');
+const addTaskDialog = document.querySelector('#add-task-dialog');
+const submitTaskButton = document.querySelector('#submit-task-button');
+const addTaskForm = document.querySelector('#add-task-form');
+
+addTaskButton.addEventListener('click', () => {
+    addTaskDialog.showModal();
+}); // the add task button's sole purpose

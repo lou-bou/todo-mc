@@ -6,6 +6,52 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hello world</h1>
+    <div id="container">
+        <h1>Task Manager</h1>
+        <button id="add-task-button">Add Task</button>
+    </div>
+    <dialog id="add-task-dialog">
+        <form id="add-task-form">
+
+            <div>
+                <label for="title">Title: </label>
+                <input type="text" name="title" id="title" required />
+            </div>
+
+            <fieldset>
+
+                <legend>Categories</legend>
+
+                <div>
+                    <input type="checkbox" id="personal" name="personal">
+                    <label for="personal">Personal</label>
+                </div>
+
+                <div>
+                    <input type="checkbox" id="work" name="work">
+                    <label for="personal">Work</label>
+                </div>
+
+                <div>
+                    <input type="checkbox" id="school" name="school">
+                    <label for="personal">School</label>
+                </div>
+
+                <div>
+                    <input type="checkbox" id="urgent" name="urgent">
+                    <label for="personal">Urgent</label>
+                </div>
+
+                <div>
+                    <input type="checkbox" id="optional" name="optional">
+                    <label for="personal">Optional</label>
+                </div>
+
+            </fieldset>
+
+            <input type="submit" value="Add Task" id="submit-task-button">
+
+        </form>
+    </dialog>
 </body>
 </html>
