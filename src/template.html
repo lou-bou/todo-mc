@@ -55,5 +55,49 @@
 
         </form>
     </dialog>
+
+    <dialog id="edit-task-dialog">
+        <form id="edit-task-form">
+
+            <div>
+                <label for="title">Title: </label>
+                <input type="text" name="title" id="title" required />
+            </div>
+
+            <fieldset>
+
+                <legend>Categories</legend>
+
+                <div>
+                    <input type="checkbox" id="personal" name="Personal">
+                    <label for="personal">Personal</label>
+                </div>
+
+                <div>
+                    <input type="checkbox" id="work" name="Work">
+                    <label for="personal">Work</label>
+                </div>
+
+                <div>
+                    <input type="checkbox" id="school" name="School">
+                    <label for="personal">School</label>
+                </div>
+
+                <div>
+                    <input type="checkbox" id="urgent" name="Urgent">
+                    <label for="personal">Urgent</label>
+                </div>
+
+                <div>
+                    <input type="checkbox" id="optional" name="Optional">
+                    <label for="personal">Optional</label>
+                </div>
+
+            </fieldset>
+
+            <input type="submit" value="Edit Task" id="submit-edit-task-button">
+
+        </form>
+    </dialog>
 </body>
 </html>

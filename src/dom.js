@@ -4,7 +4,6 @@ function renderTasksDOM() {
     const tasks = PersistanceManager.retrieveAllTasks();
 
     for (let i = 0; i < tasks.length; i++) {
-        console.log(tasks[i]);
         createTaskDOM(tasks[i]);
     }
 }
@@ -13,9 +12,15 @@ function createTaskDOM(taskObject) {
     const tasksContainer = document.querySelector('#tasks');
     const taskContainer = document.createElement('div');
     const taskTitle = document.createElement('span');
+    const taskEditButton = document.createElement('button');
 
     taskTitle.innerText = taskObject.title;
+    taskEditButton.innerText = 'Edit';
+    taskEditButton.setAttribute('class', 'edit-task-button');
+    taskEditButton.setAttribute('data-task-id', taskObject.id);
+
     taskContainer.appendChild(taskTitle);
+    taskContainer.appendChild(taskEditButton);
     tasksContainer.appendChild(taskContainer);
 }
 

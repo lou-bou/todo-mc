@@ -26,7 +26,7 @@ body {
     height: 80%;
 }
 
-button {
+#add-task-button {
     background-color: white;
     color: var(--dark-color);
     font-size: 150%;
