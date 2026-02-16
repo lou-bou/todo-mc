@@ -1,3 +1,5 @@
+// this is the entry
+
 import './style.css';
-import './logic.js';
-import './dom.js';
+import './js/logic.js';
+import './js/dom.js';
