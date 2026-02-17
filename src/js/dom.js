@@ -1,3 +1,5 @@
+// this is the entry DOM handling js module but it's also where most global event listeners go
+
 import { Task, PersistanceManager } from './logic.js';
 import { clearForm, clearForms, handleFormData } from './formsHandling.js';
 import { renderTasksDOM, createTaskDOM, editTaskDOM } from './taskDOM.js';

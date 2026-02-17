@@ -26,6 +26,20 @@ function createTaskTitleDOM(taskObject, taskContainer) {
     return taskTitle;
 }
 
+function createTaskEditButtonDOM(taskObject, taskContainer) {
+    const taskEditButton = document.createElement('button');
+
+    taskEditButton.innerText = 'Edit';
+    taskEditButton.setAttribute('class', 'edit-task-button');
+    taskEditButton.setAttribute('data-task-id', taskObject.id);
+
+    taskContainer.appendChild(taskEditButton);
+
+    createTaskEditButtonEventListener(taskObject, taskEditButton);
+
+    return taskEditButton;
+}
+
 function createTaskEditButtonEventListener(taskObject, taskEditButton) {
     const editTaskDialog = document.querySelector('#edit-task-dialog');
     const editTaskForm = document.querySelector('#edit-task-form');
@@ -45,18 +59,25 @@ function createTaskEditButtonEventListener(taskObject, taskEditButton) {
     });
 }
 
-function createTaskEditButtonDOM(taskObject, taskContainer) {
-    const taskEditButton = document.createElement('button');
+function createTaskDeleteButtonDOM(taskObject, taskContainer) {
+    const taskDeleteButton = document.createElement('button');
 
-    taskEditButton.innerText = 'Edit';
-    taskEditButton.setAttribute('class', 'edit-task-button');
-    taskEditButton.setAttribute('data-task-id', taskObject.id);
+    taskDeleteButton.innerText = 'Delete';
+    taskDeleteButton.setAttribute('class', 'delete-task-button');
+    taskDeleteButton.setAttribute('data-task-id', taskObject.id);
 
-    taskContainer.appendChild(taskEditButton);
+    taskContainer.appendChild(taskDeleteButton);
 
-    createTaskEditButtonEventListener(taskObject, taskEditButton);
+    createTaskDeleteButtonEventListener(taskObject, taskContainer);
 
-    return taskEditButton;
+    return taskDeleteButton;
+}
+
+function createTaskDeleteButtonEventListener(taskObject, taskDeleteButton) {
+    taskDeleteButton.addEventListener('click', () => {
+        // delete task object from localStorage
+        // delete task DOM
+    });
 }
 
 function createTaskCategoriesDOM(taskObject, taskContainer) {
@@ -83,7 +104,9 @@ function createTaskDOMElements(taskObject, taskContainer) {
 
     const taskEditButton = createTaskEditButtonDOM(taskObject, taskContainer);
 
-    return { taskTitle, taskCategories, taskEditButton };
+    const taskDeleteButton = createTaskDeleteButtonDOM(taskObject, taskContainer);
+
+    return { taskTitle, taskCategories, taskEditButton, taskDeleteButton };
 }
 
 export function createTaskDOM(taskObject) {
@@ -91,7 +114,7 @@ export function createTaskDOM(taskObject) {
 
     const taskContainer = createTaskContainerDOM(taskObject);
     
-    const { taskTitle, taskCategories, taskEditButton } = createTaskDOMElements(taskObject, taskContainer);
+    const { taskTitle, taskCategories, taskEditButton, taskDeleteButton } = createTaskDOMElements(taskObject, taskContainer);
 
     tasksContainer.appendChild(taskContainer);
 }
