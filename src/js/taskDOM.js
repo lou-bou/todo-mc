@@ -10,6 +10,8 @@ export function renderTasksDOM() {
 
 function createTaskContainerDOM(taskObject) {
     const taskContainer = document.createElement('div');
+
+    taskContainer.setAttribute('class', 'task-container');
     taskContainer.setAttribute('data-task-id', taskObject.id);
 
     return taskContainer;
@@ -32,8 +34,6 @@ function createTaskCategoriesDOM(taskObject, taskContainer) {
     for (const category of taskObject.categories) {
         taskCategory = document.createElement('span');
         taskCategory.innerText = category;
-        taskCategory.style.color = 'green';
-        taskCategory.style.weight = 'none';
         taskCategory.setAttribute('class', 'task-category');
 
         taskContainer.appendChild(taskCategory);
@@ -100,10 +100,29 @@ function createTaskDeleteButtonEventListener(taskObject, taskDeleteButton) {
     });
 }
 
-function createTaskStatusButtonDOM(taskObject, taskContainer) {
-    const taskStatusButton = document.createElement('button');
+function changeTaskStatus(taskObject) {
+    // this swaps the current status to its opposite
+    if (taskObject.status == 'pending') {
+        return 'completed';
+    } else {
+        return 'pending';
+    }
+}
 
-    taskStatusButton.innerText = taskObject.status;
+function setTaskStatusButtonColorDOM(taskObject) {
+    // this doesnt swap, just returns the corresponding style for each status
+    if (taskObject.status == 'pending') {
+        return 'transparent';
+    } else {
+        return 'white';
+    }
+}
+
+function createTaskStatusButtonDOM(taskObject, taskContainer) {
+    const taskStatusButton = document.createElement('div');
+
+    taskStatusButton.style.backgroundColor = setTaskStatusButtonColorDOM(taskObject);
+
     taskStatusButton.setAttribute('class', 'status-task-button');
     taskStatusButton.setAttribute('data-task-id', taskObject.id);
 
@@ -116,30 +135,35 @@ function createTaskStatusButtonDOM(taskObject, taskContainer) {
 
 function createTaskStatusButtonEventListener(taskObject, taskStatusButton) {
     taskStatusButton.addEventListener('click', () => {
-        if (taskObject.status == 'completed') {
-            taskObject.status = 'pending';
-        } else if (taskObject.status == 'pending') {
-            taskObject.status = 'completed';
-        }
+        taskObject.status = changeTaskStatus(taskObject);
         
         PersistanceManager.storeTask(taskObject);
 
-        taskStatusButton.innerText = taskObject.status;
+        taskStatusButton.style.backgroundColor = setTaskStatusButtonColorDOM(taskObject);
     });
 }
 
 function createTaskDOMElements(taskObject, taskContainer) {
     // these three DOM elements aren't really used so there's no need for their respective functions to return them but just in case yknow for potential future updates
 
-    const taskStatusButton = createTaskStatusButtonDOM(taskObject, taskContainer);
+    const titleNStatusContainer = document.createElement('div');
+    titleNStatusContainer.setAttribute('class', 'title-status-container');
 
-    const taskTitle = createTaskTitleDOM(taskObject, taskContainer);
+    const taskStatusButton = createTaskStatusButtonDOM(taskObject, titleNStatusContainer);
 
-    const taskCategories = createTaskCategoriesDOM(taskObject, taskContainer);
+    const taskTitle = createTaskTitleDOM(taskObject, titleNStatusContainer);
 
-    const taskEditButton = createTaskEditButtonDOM(taskObject, taskContainer);
+    const categoriesNButtonsContainer = document.createElement('div');
+    categoriesNButtonsContainer.setAttribute('class', 'categories-buttons-container');
 
-    const taskDeleteButton = createTaskDeleteButtonDOM(taskObject, taskContainer);
+    const taskCategories = createTaskCategoriesDOM(taskObject, categoriesNButtonsContainer);
+
+    const taskEditButton = createTaskEditButtonDOM(taskObject, categoriesNButtonsContainer);
+
+    const taskDeleteButton = createTaskDeleteButtonDOM(taskObject, categoriesNButtonsContainer);
+
+    taskContainer.appendChild(titleNStatusContainer);
+    taskContainer.appendChild(categoriesNButtonsContainer);
 
     return { taskStatusButton, taskTitle, taskCategories, taskEditButton, taskDeleteButton };
 }

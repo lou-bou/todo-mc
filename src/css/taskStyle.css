@@ -1,0 +1,45 @@
+.task-container {
+    display: flex;
+    margin: 10px;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.title-status-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.categories-buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-task-button {
+    border: 1px white solid;
+    border-radius: 100%;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.task-title {
+    font-size: 20px;
+}
+
+.task-category {
+    background-color: lightgray;
+    color: black;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 10px;
+}
+
+.delete-task-button {
+    background-color: rgb(165, 95, 106);
+}
